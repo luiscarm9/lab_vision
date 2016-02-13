@@ -5,41 +5,46 @@
 
 2.  What is the output of the ``cal`` command?
 
-        multi
-        line
-        answer
+      Febrero 2016      
+do lu ma mi ju vi sá  
+    1  2  3  4  5  6  
+ 7  8  9 10 11 12 13  
+14 15 16 17 18 19 20  
+21 22 23 24 25 26 27  
+28 29                 
+       Its the Calendar
 
 # Homework Questions
 
 1.  What is the ``grep``command?
-    >   answer
+    >   It allow you to search in a file a pattern, character or a complete line.
 
 2.  What is a *makefile*?
     >   answer
 
 4.  What does the ``-prune`` option of ``find`` do? Give an example
-    >   answer
+    >   
 
 5.  Where is the ``grub.cfg``  file
-    >   answer
+    >   It's the file which saves the boot configuration info. it allows to run different O.S setting which OS are available in the computer and the specific disk partitions of each one.
 
 6.  How many files with ``gnu`` in its name are in ``/usr/src``
-    >   answer
+    >   0 using command find /usr/src/ -name *gnu
 
 7.  How many files contain the word ``gpl`` inside in ``/usr/src``
-    >   answer
+    >   586 using command grep -H -R "gpl" /usr/src/ | wc -l
 
 8.  What does the ``cut`` command do?
-    >   answer
+    >   It allows the user to process text info, extracting column/columns info
 
 9.  What does the ``wget`` command do?
-    >   answer
+    >   It allows the user download files knowing the full http, https or ftp adress.
 
 9.  What does the ``rsync`` command do?
-    >   answer
+    >   It is used to synchronize and/copy files local or to a sever.
 
 10.  What does the ``diff`` command do?
-    >   answer
+    >   It's used to identifie the differneces between two differnet versions of the same file. (Usefull in Git)
 
 10.  What does the ``tail`` command do?
     >   answer
