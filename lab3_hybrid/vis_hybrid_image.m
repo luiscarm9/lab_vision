@@ -2,8 +2,8 @@ function output = vis_hybrid_image(hybrid_image)
 %visualize a hybrid image by progressively downsampling the image and
 %concatenating all of the images together.
 
-scales = 5; %how many downsampled versions to create
-scale_factor = 0.7; %how much to downsample each time
+scales = 11; %how many downsampled versions to create
+scale_factor = 0.9; %how much to downsample each time
 padding = 5; %how many pixels to pad.
 
 original_height = size(hybrid_image,1);
