@@ -1,0 +1,14 @@
+%%What is on the directory
+
+o1/o2 -> The original images
+1/2 -> Modified images
+Final_Hybrid -> The final result of the hybrid image
+Final_Pyramid -> The pyramid showing the hybrid image.
+
+%%Description of the images
+
+o1=> A fun photo of a friend, date 2015
+ 
+p2=> a photo of santo eccehomo which is a painting found in Villa de Leyva, Colombia. the original painting is located in one of the first churches of the country, Date of the picture 2011.
+
+
