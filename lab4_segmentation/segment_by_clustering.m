@@ -46,37 +46,37 @@ function nueva=change_feature(img,space)
       if(strcmpi(space,'lab')==1)
       colorTransform = makecform('srgb2lab');
       aux = applycform(img, colorTransform);
-      for i=1:tamanio(1)
-          for j=1:tamanio(2)
-            new(k,1) = aux(i,j,1);
-            new(k,2) = aux(i,j,2);
-            new(k,3) = aux(i,j,3);
-            k=k+1;
-          end
-
-      end
+      new=aux;
+      % for i=1:tamanio(1)
+      %     for j=1:tamanio(2)
+      %       new(k,1) = aux(i,j,1);
+      %       new(k,2) = aux(i,j,2);
+      %       new(k,3) = aux(i,j,3);
+      %       k=k+1;
+      %     end
+      % end
     elseif(strcmpi(space,'rgb')==1)
        aux=img;
-       for i=1:tamanio(1)
-           for j=1:tamanio(2)
-             new(k,1) = aux(i,j,1);
-             new(k,2) = aux(i,j,2);
-             new(k,3) = aux(i,j,3);
-             k=k+1;
-           end
-
-       end
+       new=aux;
+       % for i=1:tamanio(1)
+       %     for j=1:tamanio(2)
+       %       new(k,1) = aux(i,j,1);
+       %       new(k,2) = aux(i,j,2);
+       %       new(k,3) = aux(i,j,3);
+       %       k=k+1;
+       %     end
+       % end
     elseif(strcmpi(space,'hsv')==1)
        aux=rgb2hsv(img);
-       for i=1:tamanio(1)
-           for j=1:tamanio(2)
-             new(k,1) = aux(i,j,1);
-             new(k,2) = aux(i,j,2);
-             new(k,3) = aux(i,j,3);
-             k=k+1;
-           end
-
-       end
+       new=aux;
+      % for i=1:tamanio(1)
+      %     for j=1:tamanio(2)
+      %       new(k,1) = aux(i,j,1);
+      %       new(k,2) = aux(i,j,2);
+      %       new(k,3) = aux(i,j,3);
+      %       k=k+1;
+      %     end
+      % end
     elseif(strcmpi(space,'rgb+xy')==1)
         aux=img;
         new = zeros(tamanio(1)*tamanio(2),5);
@@ -125,11 +125,22 @@ end
 function clus=cluster_m(img,method,num)
 
   if(strcmpi(method,'k-means')==1)
-    clus=kmeans(img,num);
+    im=double(img(:,:,2:3));
+    nfila=size(im,1);
+    ncol=size(im,2);
+    im=reshape(im,nfila*ncol,2);
+
+    [clustes_ix,cluster_center]=kmeans(im,num,'distance','sqEuclidean','Replicates',3)
+
+    clus=reshape(clustes_ix,nfila,ncol);
+
   elseif(strcmpi(method,'gmm')==1)
     clus=NULL;
   elseif(strcmpi(method,'watershed')==1)
     clus=watershed(img);
+
+  elseif(strcmpi(method,'hierarchical')==1)
+
   end
 
 
