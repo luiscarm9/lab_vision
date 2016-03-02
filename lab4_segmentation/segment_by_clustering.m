@@ -7,77 +7,94 @@ function my_segmentation = segment_by_clustering(rgb_image,feature_space,cluster
     end
 
     image=rgb_image;
-    c=false;
 
-    if(strcmpi('rgb',feature_space)==1)
-        c=true;
-        new_img=change_feature(image,feature_space)
-    elseif(strcmpi('lab',feature_space)==1)
-        c=true;
-        new_img=change_feature(image,feature_space);
-    elseif(strcmpi('hsv',feature_space)==1)
-        c=true;
-        new_img=change_feature(image,feature_space);
-    elseif(strcmpi('rgb+xy',feature_space)==1)
-        c=true;
-        new_img=change_feature(image,feature_space);
-    elseif(strcmpi('lab+xy',feature_space)==1)
-        c=true;
-        new_img=change_feature(image,feature_space);
-    elseif(strcmpi('hsv+xy',feature_space)==1)
-        c=true;
-        new_img=change_feature(image,feature_space);
+    if(strcmpi(clustering_method,'hierarchical')==0)
+      c=false;
+      tami=size(image);
+      if(strcmpi('rgb',feature_space)==1)
+          c=true;
+          new_img=change_feature(image,feature_space);
+      elseif(strcmpi('lab',feature_space)==1)
+          c=true;
+          new_img=change_feature(image,feature_space);
+      elseif(strcmpi('hsv',feature_space)==1)
+          c=true;
+          new_img=change_feature(image,feature_space);
+      elseif(strcmpi('rgb+xy',feature_space)==1)
+          c=true;
+          new_img=change_feature(image,feature_space);
+      elseif(strcmpi('lab+xy',feature_space)==1)
+          c=true;
+          new_img=change_feature(image,feature_space);
+      elseif(strcmpi('hsv+xy',feature_space)==1)
+          c=true;
+          new_img=change_feature(image,feature_space);
+      end
+
+      if(c == false)
+          exp=MException('MyComponent:noSuchVariable','No correct feature space');
+          throw(exp);
+      end
+      img_clus=cluster_m(new_img,clustering_method,number_of_clusters,tami);
+
+    else
+      c=false;
+      tami=size(image);
+      if(strcmpi('rgb',feature_space)==1)
+          c=true;
+          new_img=change_feature2(image,feature_space);
+      elseif(strcmpi('lab',feature_space)==1)
+          c=true;
+          new_img=change_feature2(image,feature_space);
+      elseif(strcmpi('hsv',feature_space)==1)
+          c=true;
+          new_img=change_feature2(image,feature_space);
+      elseif(strcmpi('rgb+xy',feature_space)==1)
+          c=true;
+          new_img=change_feature2(image,feature_space);
+      elseif(strcmpi('lab+xy',feature_space)==1)
+          c=true;
+          new_img=change_feature2(image,feature_space);
+      elseif(strcmpi('hsv+xy',feature_space)==1)
+          c=true;
+          new_img=change_feature2(image,feature_space);
+      end
+
+      if(c == false)
+          exp=MException('MyComponent:noSuchVariable','No correct feature space');
+          throw(exp);
+      end
+      img_clus=cluster_m(new_img,clustering_method,number_of_clusters,tami);
+
     end
 
-    if(c == false)
-        exp=MException('MyComponent:noSuchVariable','No correct feature space');
-        throw(exp);
-    end
 
-    img_clus=cluster_m(new_img,clustering_method,number_of_clusters);
     my_segmentation=img_clus;
 
 end
 
-
 function nueva=change_feature(img,space)
   k=1;
   tamanio=size(img);
-      if(strcmpi(space,'lab')==1)
+     if(strcmpi(space,'lab')==1)
+       img=imresize(img,[300,300])
+       tamanio=size(img);
       colorTransform = makecform('srgb2lab');
       aux = applycform(img, colorTransform);
       new=aux;
-      % for i=1:tamanio(1)
-      %     for j=1:tamanio(2)
-      %       new(k,1) = aux(i,j,1);
-      %       new(k,2) = aux(i,j,2);
-      %       new(k,3) = aux(i,j,3);
-      %       k=k+1;
-      %     end
-      % end
     elseif(strcmpi(space,'rgb')==1)
+      img=imresize(img,[300,300])
+      tamanio=size(img);
        aux=img;
        new=aux;
-       % for i=1:tamanio(1)
-       %     for j=1:tamanio(2)
-       %       new(k,1) = aux(i,j,1);
-       %       new(k,2) = aux(i,j,2);
-       %       new(k,3) = aux(i,j,3);
-       %       k=k+1;
-       %     end
-       % end
     elseif(strcmpi(space,'hsv')==1)
+      img=imresize(img,[300,300])
+      tamanio=size(img);
        aux=rgb2hsv(img);
        new=aux;
-      % for i=1:tamanio(1)
-      %     for j=1:tamanio(2)
-      %       new(k,1) = aux(i,j,1);
-      %       new(k,2) = aux(i,j,2);
-      %       new(k,3) = aux(i,j,3);
-      %       k=k+1;
-      %     end
-      % end
     elseif(strcmpi(space,'rgb+xy')==1)
+      img=imresize(img,[300,300])
+      tamanio=size(img);
         aux=img;
         new = zeros(tamanio(1)*tamanio(2),5);
         for i=1:tamanio(1)
@@ -90,11 +107,14 @@ function nueva=change_feature(img,space)
               k=k+1;
             end
         end
+
     elseif(strcmpi(space,'lab+xy')==1)
+      img=imresize(img,[300,300])
+      tamanio=size(img);
       colorTransform = makecform('srgb2lab');
       aux = applycform(img, colorTransform);
       new = zeros(tamanio(1)*tamanio(2),5);
-        for i=1:tamanio(1)
+      for i=1:tamanio(1)
             for j=1:tamanio(2)
               new(k,1) = aux(i,j,1);
               new(k,2) = aux(i,j,2);
@@ -106,6 +126,8 @@ function nueva=change_feature(img,space)
         end
 
     elseif(strcmpi(space,'hsv+xy')==1)
+      img=imresize(img,[300,300])
+      tamanio=size(img);
       aux=rgb2hsv(img);
       new = zeros(tamanio(1)*tamanio(2),5);
       for i=1:tamanio(1)
@@ -119,29 +141,181 @@ function nueva=change_feature(img,space)
           end
       end
     end
-        nueva=new;
+    tam=size(new);
+    if(tam(2)>3)
+      new(:,1)=new(:,1)*0.8
+      new(:,2)=new(:,1)*0.8
+      new(:,3)=new(:,1)*0.8
+      new(:,4)=new(:,1)*1
+      new(:,5)=new(:,1)*1
+    end
+  nueva=new;
 end
 
-function clus=cluster_m(img,method,num)
+function nueva=change_feature2(img,space)
+  k=1;
+  tamanio=size(img);
+     if(strcmpi(space,'lab')==1)
+       img=imresize(img,[100,100])
+       tamanio=size(img);
+      colorTransform = makecform('srgb2lab');
+      aux = applycform(img, colorTransform);
+      new=aux;
+    elseif(strcmpi(space,'rgb')==1)
+      img=imresize(img,[100,100])
+      tamanio=size(img);
+       aux=img;
+       new=aux;
+    elseif(strcmpi(space,'hsv')==1)
+      img=imresize(img,[100,100])
+      tamanio=size(img);
+       aux=rgb2hsv(img);
+       new=aux;
+    elseif(strcmpi(space,'rgb+xy')==1)
+      img=imresize(img,[100,100])
+      tamanio=size(img);
+        aux=img;
+        new = zeros(tamanio(1)*tamanio(2),5);
+        for i=1:tamanio(1)
+            for j=1:tamanio(2)
+              new(k,1) = aux(i,j,1);
+              new(k,2) = aux(i,j,2);
+              new(k,3) = aux(i,j,3);
+              new(k,4) = i;
+              new(k,5) = j;
+              k=k+1;
+            end
+        end
+
+    elseif(strcmpi(space,'lab+xy')==1)
+      img=imresize(img,[100,100])
+      tamanio=size(img);
+      colorTransform = makecform('srgb2lab');
+      aux = applycform(img, colorTransform);
+      new = zeros(tamanio(1)*tamanio(2),5);
+      for i=1:tamanio(1)
+            for j=1:tamanio(2)
+              new(k,1) = aux(i,j,1);
+              new(k,2) = aux(i,j,2);
+              new(k,3) = aux(i,j,3);
+              new(k,4) = i;
+              new(k,5) = j;
+              k=k+1;
+            end
+        end
+
+    elseif(strcmpi(space,'hsv+xy')==1)
+      img=imresize(img,[100,100])
+      tamanio=size(img);
+      aux=rgb2hsv(img);
+      new = zeros(tamanio(1)*tamanio(2),5);
+      for i=1:tamanio(1)
+          for j=1:tamanio(2)
+            new(k,1) = aux(i,j,1);
+            new(k,2) = aux(i,j,2);
+            new(k,3) = aux(i,j,3);
+            new(k,4) = i;
+            new(k,5) = j;
+            k=k+1;
+          end
+      end
+    end
+    tam=size(new);
+    if(tam(2)>3)
+      new(:,1)=new(:,1)*0.8
+      new(:,2)=new(:,1)*0.8
+      new(:,3)=new(:,1)*0.8
+      new(:,4)=new(:,1)*1
+      new(:,5)=new(:,1)*1
+    end
+  nueva=new;
+end
+
+
+function clus=cluster_m(img,method,num,tam)
 
   if(strcmpi(method,'k-means')==1)
-    im=double(img(:,:,2:3));
-    nfila=size(im,1);
-    ncol=size(im,2);
-    im=reshape(im,nfila*ncol,2);
+    tami=size(img);
+    if numel(tami)>2
+      im=double(img(:,:,2:3));
+      nfila=size(im,1);
+      ncol=size(im,2);
+      im=reshape(im,nfila*ncol,2);
 
-    [clustes_ix,cluster_center]=kmeans(im,num,'distance','sqEuclidean','Replicates',3)
+      [clustes_ix,cluster_center]=kmeans(im,num,'distance','sqEuclidean')
 
-    clus=reshape(clustes_ix,nfila,ncol);
+      clus=reshape(clustes_ix,nfila,ncol);
+    else
+      im=double(img(:,:,:));
+      [clustes_ix,cluster_center]=kmeans(im,num,'distance','sqEuclidean')
+      clus=reshape(clustes_ix,tam(2),tam(1));
+      clus=flip(clus);
+      clus=rot90(clus,-1);
+    end
+
 
   elseif(strcmpi(method,'gmm')==1)
-    clus=NULL;
+
+    tami=size(img);
+    if numel(tami)>2
+      img1=matriz(img);
+      aux=fitgmdist(img1,num,'CovType','diagonal');
+      c=cluster(aux,img1);
+      clus=reshape(c,[size(img,1),size(img,2)]);
+      clus=flip(clus);
+      clus=rot90(clus,-1);
+    else
+      img1=img;
+      aux=fitgmdist(img1,num,'CovType','diagonal');
+      c=cluster(aux,img1);
+      clus=reshape(c,300,300);
+      clus=flip(clus);
+      clus=rot90(clus,-1);
+
+    end
+
+
   elseif(strcmpi(method,'watershed')==1)
     clus=watershed(img);
 
   elseif(strcmpi(method,'hierarchical')==1)
 
+    tam=size(img);
+    if numel(tam)>2
+      img1=matriz(img);
+      distancia = pdist(img1,'cityblock');
+      union = linkage(distancia,'average');
+      c = cluster(union,'maxclust',num);
+      clus = reshape(c, [size(img,1),size(img,2)]);
+      clus=flip(clus);
+      clus=rot90(clus,-1);
+    else
+      img1=img;
+      distancia = pdist(img1,'cityblock');
+      union = linkage(distancia,'average');
+      c = cluster(union,'maxclust',num);
+      clus = reshape(c, [100,100]);
+      clus=flip(clus);
+      clus=rot90(clus,-1);
+    end
+
+
   end
+end
 
 
+function mati=matriz(img)
+  k=1;
+  tamanio=size(img);
+  aux=img;
+  new = zeros(tamanio(1)*tamanio(2),3);
+   for i=1:tamanio(1)
+       for j=1:tamanio(2)
+         new(k,1) = aux(i,j,1);
+         new(k,2) = aux(i,j,2);
+         new(k,3) = aux(i,j,3);
+         k=k+1;
+       end
+   end
+   mati=new;
 end
