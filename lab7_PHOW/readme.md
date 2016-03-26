@@ -61,21 +61,28 @@ In addition to the source code used in the above exercise, you should upload a r
 - Limitations of the method
 - Possible improvements
 
+##Due date
+April 7, 2016; 8:00 a.m.
 
 ## Bonus
 
-You will apply the method illustrated in the script mentioned above to a new data-set. You will be given an additional set of test images without labels. You should upload your estimation of the labels for the test images to sicua. 
-http://guainia.uniandes.edu.co/imagenet_test_tiny.tar
+Apply the method illustrated in the script mentioned above to a new data-set. You will be given an additional set of test images without labels. You should predict the label for each image and upload your estimation to sicua. You can enter 10 possible labels for each image.
 
-You should upload a ``csv`` file where each line contains the name of the image, a comma, and the name of the label. The names of the labels should match those in the training data-set. For example one line could look like this
+- http://157.253.63.7/imagenet_small_bonus.tgz 
+- ssh: ``vision@157.253.63.7:datos1/vision/images/imagenet_small_bonus.tgz``
 
- ```csv
- fu5dZ5X3py25685ydvJZ9tMtY08=,hot_pot
+You should upload a ``text`` file where each line contains the name of the image, a colomn, and the name of the possible labels separated by commas . The names of the labels should match those in the training data-set. For example two lines could look like this
+
+ ```
+YzkzYTlmMmY2ODY2MDFkOGJkYTI4ZmQwZjlhYjUzMDAwYzliYThiOQ==.JPEG:harvester,malinois,drumstick,quilt,consomme,Siberian_husky,Band_Aid,otterhound,cicada,espress
+OWQ5OGRlYTE5MTEwNDA2MzQ4MWVmZTVmZjA4MWJhNDAyOTJlOTdhOQ==.JPEG:valley,centipede,stinkhorn,lacewing,web_site,perfume,ringlet,Model_T,steel_arch_bridge,white_wolf
  ```
 
-After uploading the labels to sicual, we will compare it to the ground truth for the test dataset and give you the confussion matrix. Notice that you will only be able to submit results once.
+Notice each filename should appear only once. You may enter less than 10 cathegories, but if you enter more we will only consider the first ten.
 
-The *three* submission with more correct labels will win a surprise bonus!
+After uploading the labels to sicual, we will compare it to the ground truth for the test dataset and calculate the percentage of correct guesses. Notice that we will only consider your last submission. This bonus is **individual**.
+
+The *five* submission with more correct labels will win 5 additional points for the lab! The final grade of the lab is calculated as the sum of all labs, plus any bonuses, all divided by the total number of labs.
 
 Notice we will need to reproduce your results by running your code again (you can upload the code after the contest ends):
 - Make sure to set the seed for the random generator
@@ -83,7 +90,6 @@ Notice we will need to reproduce your results by running your code again (you ca
 
 You may improve the classifier using the techniques seen in class.
 
-
-##Due date
-April 5, 2016; 8:00 a.m.
+##Bonus date
+April 21, 2016; 8:00 a.m.
 
