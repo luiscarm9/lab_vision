@@ -102,3 +102,5 @@ C_M = confusionmat(label,pr(:));
 save('label.mat','label');save('C_Matrix.mat','C_M');
 stats=confussionmatStats(label,pr(:));
 %credit stats function to http://www.mathworks.com/matlabcentral/fileexchange/46035-confusionmatstats-group-grouphat-/content/confusionmatStats.m
+diago=diag(stats.confusionMat);
+accuracy=sum(diago)/numel(directoriot);
