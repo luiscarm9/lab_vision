@@ -50,16 +50,16 @@ Don't just say *"it improves"*; explain how much it improves. Is it linear? Is i
 
 In addition to the source code used in the above exercise, you should upload a report (using the LaTeX style) containing the following points
 
-- [] Description of the database
-- [] Description of the recognition method (focus on the adjustments you made to adapt it to the database)
-- [] Training and test results
-- [] Discussion of the results
-- [] Discussion on the effecs of
+- [ ] Description of the database
+- [ ] Description of the recognition method (focus on the adjustments you made to adapt it to the database)
+- [ ] Training and test results
+- [ ] Discussion of the results
+- [ ] Discussion on the effecs of
   - number of categories 
   - size of training set
   - number of spatial partitions
-- [] Limitations of the method
-- [] Possible improvements
+- [ ] Limitations of the method
+- [ ] Possible improvements
 
 ##Due date
 April 7, 2016; 8:00 a.m.
