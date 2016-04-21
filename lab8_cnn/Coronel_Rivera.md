@@ -8,7 +8,7 @@ The proposed architecture of our networks is the following presented using the f
  ```matlab
    vl_simplenn_display(network)
 ```
-![Architecture](/red.png)
+![Architecture](https://raw.githubusercontent.com/luiscarm9/lab_vision/master/lab8_cnn/red.PNG)
 ### 1.1 Description
 For the architecture we designed a 9 layers convolutional neuronal network, the decision of this number of layers was made by try and erro tryen to get the best result by the limit factor of the time (1 hour of running time). Our network like the AlexNet network was a set of leyers were the diferential factor was that after a convolutional layer the next layer must be a poolong one. We tried to put another nonlinearity layer in between of a pooling a convolutional but this affected the general perfomance of the algorithm so we didn't applied but we think that this would could be handly to reduce the variablity in the responses learned from the filters.
 
